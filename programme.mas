@@ -1,0 +1,95 @@
+﻿Loop, 			Input
+				Store p1
+        		Input
+        		Store p2
+        
+check_draw,  	Load p1
+				Subt p2
+                Skipcond 400
+                Jump not_equal
+                Jump draw
+                
+not_equal,		Load p1
+				Subt p2
+                Skipcond 800
+				Jump p2_win
+                Jump p1_win
+
+draw,			LOAD D
+                Output
+                LOAD R
+                Output
+                LOAD A
+                Output
+                LOAD W
+                Output
+                LOAD NEWL
+                Output
+                Jump Loop
+                
+p1_win,			LOAD p1
+				ADD p2
+                SUBT four
+                Skipcond 400
+                Jump not_equal_four
+                Jump print_p2
+                
+p2_win,			LOAD p1
+				ADD p2
+                SUBT four
+                Skipcond 400
+                Jump not_equal_four
+                Jump print_p1
+				
+not_equal_four,	LOAD p2
+				SUBT p1
+                Skipcond 800
+                Jump print_p1
+                Jump print_p2
+				               
+print_p1,		LOAD P
+				Output
+                LOAD ONE
+                Output
+                Jump print_won
+                
+print_p2,		LOAD P
+				Output
+                LOAD TWO
+                Output
+                Jump print_won
+                
+print_won,		Load SPACE
+				Output
+                LOAD W
+				Output
+                Load O
+                Output
+                Load N
+                Output
+                LOAD NEWL
+                Output
+                Jump ask_rerun
+                
+ask_rerun,		Input
+				subt one
+                Skipcond 400
+                Jump Loop
+                HALT
+                
+p1, DEC 0
+p2, DEC 0
+one, DEC 1
+four, DEC 4
+S, HEX 40
+D, HEX 44
+R, HEX 52
+A, HEX 41
+W, HEX 57
+O, HEX 4f
+N, HEX 4e
+P, HEX 50
+ONE, HEX 31
+TWO, HEX 32
+NEWL, HEX 0a
+SPACE, HEX 20
